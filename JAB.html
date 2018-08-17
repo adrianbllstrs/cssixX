@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>More Miles</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <header><strong><center><font size="9">Welcome to the JAB</header></strong></center></font>
+    
+                            
+    <style>
+    .right{
+    float:right;
+    }
+    table, th, {
+    border: 1px solid black;
+            
+    }
+    </style>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 75%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        width: 1300px;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  
+  
+  
+  
+   <span class="right">
+   <table>
+   <tr>
+   <th>Gas Station</th>
+   <th>Price</th>
+   </tr>
+   <tr>
+   <td>Quick Stop Market</td>
+   <td>3.09</td>
+   </tr> 
+   <tr>
+   <td>Fastrip</td>
+   <td>3.13</td>
+   </tr>
+   <tr>
+   <td>ARCO</td>
+   <td>3.15</td>
+    <tr>
+   <td>Costco</td>
+   <td>3.15</td>
+   </tr>
+   <tr>
+   <td>American</td>
+   <td>3.15</td>
+   </tr>
+   <tr>
+   <td>Safeway</td>
+   <td>3.18</td>
+   </tr>
+   <tr>
+   <td>Mobil</td>
+   <td>3.23</td>
+   </tr>
+
+
+   </table>
+   </span>
+
+
+
+
+    <script>
+      // This example requires the Places library. Include the libraries=places
+      // parameter when you first load the API. For example:
+      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+      var map;
+      var infowindow;
+
+      function initMap() {
+        var chico = {lat:39.735481, lng: -121.838050};
+
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: chico ,
+          zoom: 14
+        });
+        
+
+        infowindow = new google.maps.InfoWindow();
+        var service = new google.maps.places.PlacesService(map);
+        service.nearbySearch({
+          location: chico ,
+          radius: 2000,
+          type: ['gas_station']
+        }, callback);
+      }
+
+      function callback(results, status) {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+          for (var i = 0; i < results.length; i++) {
+            createMarker(results[i]);
+          }
+        }
+      }
+
+      function createMarker(place) {
+        var placeLoc = place.geometry.location;
+        var marker = new google.maps.Marker({
+          map: map,
+          position: place.geometry.location
+        });
+
+        google.maps.event.addListener(marker, 'click', function() {
+         console.log(place.vicinity);
+         infowindow.setContent(place.name + " " +  place.vicinity);
+         infowindow.open(map, this);
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7erMCsQo5MY7I9YbS-SLNxHWujO196uM&libraries=places&callback=initMap" async defer></script>
+  </body>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7erMCsQo5MY7I9YbS-SLNxHWujO196uM&libraries=places&callback=initMap"
+        async defer></script>
+
+    
+    
+    <script>
+  (function() {
+    var cx = '014265075601333634670:s_5qblxlrqe';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+
+</html>
